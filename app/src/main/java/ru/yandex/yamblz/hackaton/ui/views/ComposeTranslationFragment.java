@@ -16,11 +16,15 @@ import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.yandex.speechkit.Vocalizer;
 import ru.yandex.yamblz.hackaton.R;
 import ru.yandex.yamblz.hackaton.core.Task;
 import ru.yandex.yamblz.hackaton.di.DaggerFragmentComponent;
@@ -51,10 +55,11 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @BindView(R.id.answer)
     EditText answer;
 
+    List<View> list;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FragmentComponent component = DaggerFragmentComponent.builder().appComponent(getAppComponent()).build();
         component.inject(this);
     }
@@ -127,12 +132,18 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
         lettersBox.removeAllViews();
         char[] shuffled = Helper.shuffle(translate.toCharArray());
         LayoutInflater inflater = getActivity().getLayoutInflater();
+        list = new ArrayList<>();
         for(char ch : shuffled) {
             final Button view = (Button)inflater.inflate(R.layout.letter, lettersBox, false);
+
+            view.setTextColor(getResources().getColor(R.color.text_primary));
+            view.setBackgroundColor(getResources().getColor(R.color.background_enabled));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    v.setClickable(false);
+                    v.setEnabled(false);
+                    ((Button)v).setTextColor(getResources().getColor(R.color.text_secondary));
+                    v.setBackgroundColor(getResources().getColor(R.color.background_disabled));
                     if(answer.getText().length() < translate.length()) {
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == translate.length()) {
@@ -143,6 +154,7 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
             });
             view.setText(Character.toString(ch));
             lettersBox.addView(view);
+            list.add(view);
         }
     }
 
