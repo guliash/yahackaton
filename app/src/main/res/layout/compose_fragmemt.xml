@@ -17,12 +17,12 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="@null"
+            android:id="@+id/bnt_close"
             android:src="@drawable/icn_close" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:id="@+id/compose_progress_bar"
-
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -31,6 +31,7 @@
         <ImageButton
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:id="@+id/btn_skip"
             android:background="@null"
             android:src="@drawable/icn_skip_next" />
     </LinearLayout>
@@ -72,13 +73,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center" />
-            <ImageButton
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:id="@+id/backspace"
-                android:scaleType="center"
-                android:background="@null"
-                android:src="@drawable/ic_backspace_grey600_24dp"/>
         </LinearLayout>
 
         <com.google.android.flexbox.FlexboxLayout

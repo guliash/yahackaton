@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.yamblz.hackaton.R;
+import ru.yandex.yamblz.hackaton.core.Task;
 import ru.yandex.yamblz.hackaton.di.DaggerFragmentComponent;
 import ru.yandex.yamblz.hackaton.di.FragmentComponent;
 import ru.yandex.yamblz.hackaton.dictionary.Helper;
@@ -33,15 +36,20 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @BindView(R.id.word)
     TextView wordTextView;
 
+    @BindView(R.id.bnt_close)
+    ImageButton buttonClose;
+
+    @BindView(R.id.btn_skip)
+    ImageView buttonSkip;
+
+    @BindView(R.id.compose_progress_bar)
+    ProgressBar progressBar;
 
     @BindView(R.id.letters)
     FlexboxLayout lettersBox;
 
     @BindView(R.id.answer)
     EditText answer;
-
-    @BindView(R.id.backspace)
-    ImageButton backspace;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +78,20 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
         View view = inflater.inflate(R.layout.compose_fragmemt, container, false);
 
         ButterKnife.bind(this, view);
+        buttonSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToNext();
+            }
+        });
+        buttonClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
+        progressBar.setMax(Task.WORDS_IN_ROUND);
         return view;
     }
 
@@ -89,6 +110,14 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @Override
     public void showCorrectAnswer() {
         Snackbar.make(answer, getString(R.string.correct), Snackbar.LENGTH_LONG).show();
+        progressBar.setProgress(progressBar.getProgress() + 1);
+        if (progressBar.getProgress() == Task.WORDS_IN_ROUND) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+        moveToNext();
+    }
+
+    private void moveToNext() {
         presenter.getQuiz();
         answer.setError(null);
         answer.setText("");
@@ -103,6 +132,7 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    v.setClickable(false);
                     if(answer.getText().length() < translate.length()) {
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == translate.length()) {
@@ -116,7 +146,6 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
         }
     }
 
-    @OnClick(R.id.backspace)
     void onBackspaceClick() {
         String str = answer.getText().toString();
         if(str.length() > 0) {
