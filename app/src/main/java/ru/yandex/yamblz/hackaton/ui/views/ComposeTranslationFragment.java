@@ -47,7 +47,6 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FragmentComponent component = DaggerFragmentComponent.builder().appComponent(getAppComponent()).build();
         component.inject(this);
     }
@@ -105,7 +104,9 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
                 @Override
                 public void onClick(View v) {
                     if(answer.getText().length() < translate.length()) {
-                        Vocalizer vocalizer = Vocalizer.createVocalizer("en", view.getText().toString(), true);
+                        Vocalizer vocalizer = Vocalizer.createVocalizer("ru", view.getText().toString(), false);
+                        vocalizer.play();
+                        vocalizer.start();
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == translate.length()) {
                             presenter.checkQuiz(answer.getText().toString());
