@@ -4,4 +4,6 @@
     <string name="task_name">ПОИСК ПАРЫ</string>
     <string name="settings">Настройки</string>
     <string name="input_word_translation">ВВЕДИТЕ ПЕРЕВОД СЛОВА</string>
+    <string name="wrong">НЕВЕРНО</string>
+    <string name="correct">ВЕРНО</string>
 </resources>

@@ -17,7 +17,9 @@ public class MainActivity extends BaseActivity implements MainFragment.Callbacks
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportFragmentManager().beginTransaction().add(R.id.main_frame_layout, new MainFragment()).commit();
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            getSupportFragmentManager().beginTransaction().add(R.id.main_frame_layout, new MainFragment()).commit();
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }

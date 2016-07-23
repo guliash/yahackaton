@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ru.yandex.yamblz.hackaton.core.Word;
@@ -107,6 +108,7 @@ public class DbWordStorage extends SQLiteOpenHelper implements WordsStorage {
                         cursor.getString(langColIndex)));
             } while(cursor.moveToNext());
         }
+        cursor.close();
         db.close();
         return words;
     }
@@ -119,5 +121,39 @@ public class DbWordStorage extends SQLiteOpenHelper implements WordsStorage {
     @Override
     public void persistWords(List<Word> words) {
 
+    }
+
+    @Override
+    public List<Word> getWords(String lang) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(WORDS_TABLE, new String[] {"text", "lang", "rating"}, "lang = ?",
+                new String[] { String.valueOf(lang) }, null, null, null);
+        List<Word> words = new ArrayList<>();
+        if(cursor.moveToFirst()) {
+            int textColIndex = cursor.getColumnIndex("text");
+            int langColIndex = cursor.getColumnIndex("lang");
+            int ratingColIndex = cursor.getColumnIndex("rating");
+            do {
+                words.add(new Word(cursor.getString(textColIndex), cursor.getInt(ratingColIndex),
+                        cursor.getString(langColIndex)));
+            } while(cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return words;
+    }
+
+    @Override
+    public Word getRandomWord() {
+        List<Word> words = getWords();
+        Collections.shuffle(words);
+        return words.get(0);
+    }
+
+    @Override
+    public Word getRandomWord(String lang) {
+        List<Word> words = getWords(lang);
+        Collections.shuffle(words);
+        return words.get(0);
     }
 }
