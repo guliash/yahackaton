@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.yandex.speechkit.Vocalizer;
 import ru.yandex.yamblz.hackaton.R;
 import ru.yandex.yamblz.hackaton.di.DaggerFragmentComponent;
 import ru.yandex.yamblz.hackaton.di.FragmentComponent;
@@ -103,6 +104,7 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
                 @Override
                 public void onClick(View v) {
                     if(answer.getText().length() < translate.length()) {
+                        Vocalizer vocalizer = Vocalizer.createVocalizer("en", view.getText().toString(), true);
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == translate.length()) {
                             presenter.checkQuiz(answer.getText().toString());

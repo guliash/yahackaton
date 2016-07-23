@@ -18,6 +18,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.yandex.speechkit.SpeechKit;
 import ru.yandex.yamblz.hackaton.MyApplication;
 import ru.yandex.yamblz.hackaton.dictionary.Dictionary;
 import ru.yandex.yamblz.hackaton.dictionary.DictionaryService;
@@ -82,6 +83,14 @@ public class AppModule {
     @Singleton
     WordsStorage provideWordsStorage(Context context) {
         return new DbWordStorage(context);
+    }
+
+    @Provides
+    @Singleton
+    SpeechKit provideSpeechKit(Context context) {
+        SpeechKit speechKit = SpeechKit.getInstance();
+        speechKit.configure(context, "1ec90874-6646-423d-bca2-eddd3fd07f0b");
+        return speechKit;
     }
 
 

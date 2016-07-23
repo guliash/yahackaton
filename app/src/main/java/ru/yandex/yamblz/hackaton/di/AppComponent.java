@@ -7,6 +7,7 @@ import java.util.concurrent.Executor;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ru.yandex.speechkit.SpeechKit;
 import ru.yandex.yamblz.hackaton.dictionary.Dictionary;
 import ru.yandex.yamblz.hackaton.storage.WordsStorage;
 import ru.yandex.yamblz.hackaton.ui.views.ComposeTranslationFragment;
@@ -23,6 +24,8 @@ public interface AppComponent {
     Executor workerExecutor();
 
     WordsStorage wordsStorage();
+
+    SpeechKit speechKit();
 
     void inject(MainActivity activity);
 
