@@ -1,5 +1,6 @@
 package ru.yandex.yamblz.hackaton.di;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -12,12 +13,27 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.yandex.yamblz.hackaton.MyApplication;
 import ru.yandex.yamblz.hackaton.dictionary.Dictionary;
 import ru.yandex.yamblz.hackaton.dictionary.DictionaryService;
 import ru.yandex.yamblz.hackaton.dictionary.YaDictionary;
+import ru.yandex.yamblz.hackaton.storage.DbWordStorage;
+import ru.yandex.yamblz.hackaton.storage.WordsStorage;
 
 @Module
 public class AppModule {
+
+    private MyApplication application;
+
+    public AppModule(MyApplication application) {
+        this.application = application;
+    }
+
+    @Singleton
+    @Provides
+    Context provideContext() {
+        return (Context)application;
+    }
 
     @Singleton
     @Provides
@@ -50,5 +66,12 @@ public class AppModule {
     Handler provideMainThreadHandler() {
         return new Handler(Looper.getMainLooper());
     }
+
+    @Provides
+    @Singleton
+    WordsStorage provideWordsStorage(Context context) {
+        return new DbWordStorage(context);
+    }
+
 
 }
