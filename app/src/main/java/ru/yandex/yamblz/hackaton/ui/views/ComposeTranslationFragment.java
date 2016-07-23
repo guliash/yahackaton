@@ -33,6 +33,7 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @BindView(R.id.word)
     TextView wordTextView;
 
+
     @BindView(R.id.letters)
     FlexboxLayout lettersBox;
 
