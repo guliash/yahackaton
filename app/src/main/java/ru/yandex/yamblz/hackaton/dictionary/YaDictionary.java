@@ -20,52 +20,28 @@ public class YaDictionary implements Dictionary {
 
     private static final String API_KEY = "dict.1.1.20160723T044019Z.0b30322dc973db67.75c83fd81d1b234c6db3b5ae2161d6827535be1e";
 
-    private static final String SERVER = "dictionary.yandex.net";
-    //api/v1/dicservice.json
-
-    private OkHttpClient mNetworkClient;
-    private Gson mGson;
+    private DictionaryService mService;
 
     @Inject
-    public YaDictionary(OkHttpClient networkClient, Gson gson) {
-        this.mNetworkClient = networkClient;
-        this.mGson = gson;
+    public YaDictionary(DictionaryService service) {
+        this.mService = service;
     }
 
     @Override
     @Nullable
     public List<String> getLangs() {
-        HttpUrl httpUrl = new HttpUrl.Builder()
-                .scheme("https")
-                .host(SERVER)
-                .addPathSegment("api/v1/dicservice.json/getLangs")
-                .addEncodedQueryParameter("key", API_KEY).build();
-        Log.e("TAG", httpUrl.toString());
-        Request request = new Request.Builder().url(httpUrl).build();
         try {
-            Response response = mNetworkClient.newCall(request).execute();
-            return mGson.fromJson(response.body().string(), new TypeToken<List<String>>(){}.getType());
+            return mService.getLangs(API_KEY).execute().body();
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }
 
     @Override
     public DicResult lookup(String lang, String text, @Nullable String ui, int flags) {
-        HttpUrl httpUrl = new HttpUrl.Builder()
-                .addPathSegment(SERVER)
-                .addPathSegment("lookup")
-                .addEncodedQueryParameter("lang", lang)
-                .addEncodedQueryParameter("text", text)
-                .addEncodedQueryParameter("ui", ui)
-                .addEncodedQueryParameter("flags", Integer.toString(flags)).build();
-        Request request = new Request.Builder().url(httpUrl).build();
         try {
-            Response response = mNetworkClient.newCall(request).execute();
-            return mGson.fromJson(response.body().string(), DicResult.class);
+            return mService.lookup(API_KEY, lang, text, ui, flags).execute().body();
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }
