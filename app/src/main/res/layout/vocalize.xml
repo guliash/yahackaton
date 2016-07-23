@@ -50,11 +50,12 @@
         android:layout_weight="0.4">
         
         <ImageButton
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            android:src="@drawable/btn_sound_active"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/play"
             android:background="@null"
             android:id="@+id/vocalize"
+            android:scaleType="center"
             android:layout_gravity="center"/>
         
     </FrameLayout>
