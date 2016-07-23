@@ -8,4 +8,6 @@
     <string name="words_for_learn">Слова для изучения</string>
     <string name="settings_in_stat">Настройки задания</string>
     <string name="count_words_in_tasks">Слов в задании</string>
+    <string name="wrong">НЕВЕРНО</string>
+    <string name="correct">ВЕРНО</string>
 </resources>

@@ -6,6 +6,11 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -65,6 +70,12 @@ public class AppModule {
     @Singleton
     Handler provideMainThreadHandler() {
         return new Handler(Looper.getMainLooper());
+    }
+
+    @Provides
+    @Singleton
+    Executor provideWorkerExecutor() {
+        return new ThreadPoolExecutor(4, 10, 120, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(1));
     }
 
     @Provides

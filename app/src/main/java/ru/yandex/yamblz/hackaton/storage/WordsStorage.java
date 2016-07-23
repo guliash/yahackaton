@@ -8,6 +8,12 @@ public interface WordsStorage {
 
     List<Word> getWords();
 
+    List<Word> getWords(String lang);
+
+    Word getRandomWord();
+
+    Word getRandomWord(String lang);
+
     void persistWord(Word word);
 
     void persistWords(List<Word> words);
