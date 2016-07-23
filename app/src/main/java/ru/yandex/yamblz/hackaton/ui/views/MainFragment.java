@@ -1,5 +1,7 @@
 package ru.yandex.yamblz.hackaton.ui.views;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,7 @@ public class MainFragment extends BaseFragment implements MainFragmentAdapter.Ca
         TASKS.add("7");
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -48,6 +53,7 @@ public class MainFragment extends BaseFragment implements MainFragmentAdapter.Ca
             throw new RuntimeException("Should implement interface");
         }
         mCallbacks = (Callbacks)context;
+        getActivity().setTitle("Режим обучения");
     }
 
     @Nullable
@@ -58,7 +64,6 @@ public class MainFragment extends BaseFragment implements MainFragmentAdapter.Ca
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new MainFragmentAdapter(TASKS, this));
-
         return view;
     }
 

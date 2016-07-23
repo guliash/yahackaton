@@ -2,14 +2,14 @@ package ru.yandex.yamblz.hackaton.ui.views;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import ru.yandex.yamblz.hackaton.R;
 import ru.yandex.yamblz.hackaton.core.Task;
-import ru.yandex.yamblz.hackaton.ui.adapters.MainFragmentAdapter;
 
 public class MainActivity extends BaseActivity implements MainFragment.Callbacks {
 
@@ -19,6 +19,7 @@ public class MainActivity extends BaseActivity implements MainFragment.Callbacks
         setContentView(R.layout.activity_main);
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame_layout, new MainFragment()).commit();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.text_primary));
         setSupportActionBar(toolbar);
     }
 
@@ -32,8 +33,34 @@ public class MainActivity extends BaseActivity implements MainFragment.Callbacks
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.settings) {
+            showPopupMenu(findViewById(id));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.inflate(R.menu.main_popup_menu);
+
+        popupMenu
+                .setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+
+                            case R.id.statistic:
+
+                                return true;
+                            case R.id.words:
+
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+        popupMenu.show();
     }
 
     private void showFragment(String task) {

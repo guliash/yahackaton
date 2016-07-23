@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/statistic"
+        android:id="@+id/statistic"/>
+    <item android:title="@string/words_for_learn"
+        android:id="@+id/words"/>
+
+</menu>
