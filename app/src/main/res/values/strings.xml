@@ -3,4 +3,5 @@
     <string name="choose_learning_mode">Выберите режим обучения</string>
     <string name="task_name">ПОИСК ПАРЫ</string>
     <string name="settings">Настройки</string>
+    <string name="input_word_translation">ВВЕДИТЕ ПЕРЕВОД СЛОВА</string>
 </resources>

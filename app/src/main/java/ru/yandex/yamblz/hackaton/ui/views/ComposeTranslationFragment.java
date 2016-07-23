@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import ru.yandex.yamblz.hackaton.R;
+
 public class ComposeTranslationFragment extends BaseFragment implements ComposeTranslationView {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.compose_fragmemt, container, false);
+        return view;
     }
 
     @Override
