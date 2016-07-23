@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import ru.yandex.yamblz.hackaton.ui.BaseFragment;
-
 public class ChooseTranslationFragment extends BaseFragment implements ChooseTranslationView {
 
     @Nullable

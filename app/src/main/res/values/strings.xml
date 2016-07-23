@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Hackaton</string>
+    <string name="choose_learning_mode">Выберите режим обучения</string>
+    <string name="task_name">ПОИСК ПАРЫ</string>
 </resources>

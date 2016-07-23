@@ -5,8 +5,9 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.yandex.yamblz.hackaton.ui.MainActivity"
+    tools:context="ru.yandex.yamblz.hackaton.ui.views.MainActivity"
     android:orientation="vertical">
+
 
     <include layout="@layout/toolbar" />
 
