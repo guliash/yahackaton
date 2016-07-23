@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class ChooseTranslationFragment extends BaseFragment implements ChooseTranslationView {
+public class ComposeTranslationFragment extends BaseFragment implements ComposeTranslationView {
 
     @Nullable
     @Override

@@ -1,13 +1,13 @@
 package ru.yandex.yamblz.hackaton.ui.presenters;
 
-import ru.yandex.yamblz.hackaton.ui.views.ChooseTranslationView;
+import ru.yandex.yamblz.hackaton.ui.views.ComposeTranslationView;
 
 public class ChooseTranslationPresenterImpl implements ChooseTranslationPresenter {
 
-    private ChooseTranslationView mView;
+    private ComposeTranslationView mView;
 
     @Override
-    public void onViewAttach(ChooseTranslationView view) {
+    public void onViewAttach(ComposeTranslationView view) {
         this.mView = view;
     }
 
