@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="32dp"
+        android:textColor="@color/black"
         android:text="@string/choose_learning_mode"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
