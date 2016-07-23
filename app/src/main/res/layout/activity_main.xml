@@ -8,7 +8,6 @@
     tools:context="ru.yandex.yamblz.hackaton.ui.views.MainActivity"
     android:orientation="vertical">
 
-
     <include layout="@layout/toolbar" />
 
     <FrameLayout

@@ -40,7 +40,7 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TASK) {
-            ((TaskHolder) holder).name.setText(tasksList.get(position));
+            ((TaskHolder) holder).name.setText(tasksList.get(position - 1));
         }
     }
 
