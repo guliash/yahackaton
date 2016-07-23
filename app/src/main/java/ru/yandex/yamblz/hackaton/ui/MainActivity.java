@@ -1,11 +1,8 @@
 package ru.yandex.yamblz.hackaton.ui;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.util.List;
