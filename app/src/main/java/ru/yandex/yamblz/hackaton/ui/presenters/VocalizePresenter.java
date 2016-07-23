@@ -12,4 +12,6 @@ public interface VocalizePresenter {
 
     void getWord();
 
+    void checkAnswer(String answer);
+
 }

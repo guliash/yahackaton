@@ -7,6 +7,7 @@ import java.util.concurrent.Executor;
 import ru.yandex.speechkit.SpeechKit;
 import ru.yandex.speechkit.Vocalizer;
 import ru.yandex.yamblz.hackaton.core.Word;
+import ru.yandex.yamblz.hackaton.di.PerFragment;
 import ru.yandex.yamblz.hackaton.dictionary.DicResult;
 import ru.yandex.yamblz.hackaton.dictionary.Helper;
 import ru.yandex.yamblz.hackaton.storage.WordsStorage;
@@ -64,6 +65,15 @@ public class VocalizePresenterImpl implements VocalizePresenter {
                 });
             }
         });
+    }
+
+    @Override
+    public void checkAnswer(String answer) {
+        if(word.getText().equals(answer)) {
+            view.showCorrect();
+        } else {
+            view.showWrong();
+        }
     }
 
     private void postWord(Word word) {

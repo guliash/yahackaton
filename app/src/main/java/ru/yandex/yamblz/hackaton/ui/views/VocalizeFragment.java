@@ -2,6 +2,7 @@ package ru.yandex.yamblz.hackaton.ui.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class VocalizeFragment extends BaseFragment implements VocalizeView {
                     if(answer.getText().length() < word.getText().length()) {
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == word.getText().length()) {
+                            presenter.checkAnswer(answer.getText().toString());
                         }
                     }
                 }
@@ -92,5 +94,19 @@ public class VocalizeFragment extends BaseFragment implements VocalizeView {
             view.setText(Character.toString(ch));
             lettersBox.addView(view);
         }
+    }
+
+    @Override
+    public void showCorrect() {
+        Snackbar.make(answer, getString(R.string.correct), Snackbar.LENGTH_LONG).show();
+        presenter.getWord();
+        answer.setError(null);
+        answer.setText("");
+    }
+
+    @Override
+    public void showWrong() {
+        answer.setError(getString(R.string.wrong));
+        answer.setText("");
     }
 }

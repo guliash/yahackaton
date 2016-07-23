@@ -6,4 +6,8 @@ public interface VocalizeView {
 
     void showWord(Word word);
 
+    void showCorrect();
+
+    void showWrong();
+
 }
