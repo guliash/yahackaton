@@ -11,7 +11,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("TAG", getAppComponent().wordsStorage().getWords().toString());
-
+        getSupportFragmentManager().beginTransaction().add(R.id.main_frame_layout, new MainFragment()).commit();
     }
 }
