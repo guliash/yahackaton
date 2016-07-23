@@ -56,7 +56,9 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     @BindView(R.id.answer)
     EditText answer;
 
-    List<View> list;
+    @BindView(R.id.backspace)
+    ImageButton backspace;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,24 +81,22 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
         presenter.onViewDetach();
     }
 
+    @OnClick(R.id.btn_skip)
+    void btnSkipClick() {
+        moveToNext();
+    }
+
+    @OnClick(R.id.bnt_close)
+    void btnCloseClick() {
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.compose_fragmemt, container, false);
 
         ButterKnife.bind(this, view);
-        buttonSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                moveToNext();
-            }
-        });
-        buttonClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        });
 
         progressBar.setMax(Task.WORDS_IN_ROUND);
         return view;
@@ -134,18 +134,11 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
         lettersBox.removeAllViews();
         char[] shuffled = Helper.shuffle(translate.toCharArray());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        list = new ArrayList<>();
         for(char ch : shuffled) {
             final Button view = (Button)inflater.inflate(R.layout.letter, lettersBox, false);
-
-            view.setTextColor(getResources().getColor(R.color.text_primary));
-            view.setBackgroundColor(getResources().getColor(R.color.background_enabled));
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    v.setEnabled(false);
-                    ((Button)v).setTextColor(getResources().getColor(R.color.text_secondary));
-                    v.setBackgroundColor(getResources().getColor(R.color.background_disabled));
                     if(answer.getText().length() < translate.length()) {
                         answer.setText(answer.getText().toString() + view.getText().toString());
                         if(answer.getText().length() == translate.length()) {
@@ -156,10 +149,10 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
             });
             view.setText(Character.toString(ch));
             lettersBox.addView(view);
-            list.add(view);
         }
     }
 
+    @OnClick(R.id.backspace)
     void onBackspaceClick() {
         String str = answer.getText().toString();
         if(str.length() > 0) {

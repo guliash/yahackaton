@@ -74,6 +74,13 @@
                 android:enabled="false"
                 android:layout_weight="1"
                 android:gravity="center" />
+            <ImageButton
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:id="@+id/backspace"
+                android:scaleType="center"
+                android:background="@null"
+                android:src="@drawable/ic_backspace_grey600_24dp"/>
         </LinearLayout>
 
         <com.google.android.flexbox.FlexboxLayout

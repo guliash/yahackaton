@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.google.android.flexbox.FlexboxLayout;
 
@@ -20,6 +22,7 @@ import butterknife.OnClick;
 import ru.yandex.speechkit.SpeechKit;
 import ru.yandex.speechkit.Vocalizer;
 import ru.yandex.yamblz.hackaton.R;
+import ru.yandex.yamblz.hackaton.core.Task;
 import ru.yandex.yamblz.hackaton.core.Word;
 import ru.yandex.yamblz.hackaton.di.DaggerFragmentComponent;
 import ru.yandex.yamblz.hackaton.dictionary.Helper;
@@ -38,6 +41,18 @@ public class VocalizeFragment extends BaseFragment implements VocalizeView {
 
     @BindView(R.id.vocalize)
     ImageButton vocalize;
+
+    @BindView(R.id.backspace)
+    ImageButton backspace;
+
+    @BindView(R.id.compose_progress_bar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.bnt_close)
+    ImageButton buttonClose;
+
+    @BindView(R.id.btn_skip)
+    ImageView buttonSkip;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,12 +80,30 @@ public class VocalizeFragment extends BaseFragment implements VocalizeView {
 
         ButterKnife.bind(this, view);
 
+        progressBar.setMax(Task.WORDS_IN_ROUND);
+
         return view;
+    }
+
+    @OnClick(R.id.btn_skip)
+    void btnSkipClick() {
+        moveToNext();
+    }
+
+    @OnClick(R.id.bnt_close)
+    void btnCloseClick() {
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
     @OnClick(R.id.vocalize)
     public void vocalize() {
         presenter.vocalize();
+    }
+
+    private void moveToNext() {
+        presenter.getWord();
+        answer.setError(null);
+        answer.setText("");
     }
 
     @Override
@@ -99,14 +132,25 @@ public class VocalizeFragment extends BaseFragment implements VocalizeView {
     @Override
     public void showCorrect() {
         Snackbar.make(answer, getString(R.string.correct), Snackbar.LENGTH_LONG).show();
-        presenter.getWord();
-        answer.setError(null);
-        answer.setText("");
+        progressBar.setProgress(progressBar.getProgress() + 1);
+        if (progressBar.getProgress() == Task.WORDS_IN_ROUND) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+        moveToNext();
     }
 
     @Override
     public void showWrong() {
         answer.setError(getString(R.string.wrong));
         answer.setText("");
+    }
+
+
+    @OnClick(R.id.backspace)
+    void onBackspaceClick() {
+        String str = answer.getText().toString();
+        if(str.length() > 0) {
+            answer.setText(str.substring(0, answer.length() - 1));
+        }
     }
 }
