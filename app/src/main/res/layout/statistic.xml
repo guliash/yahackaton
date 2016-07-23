@@ -47,6 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="@string/count_words_in_tasks"
                 android:textColor="@color/text_secondary"
                 android:layout_marginLeft="16dp"/>
@@ -60,9 +61,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/text_primary"
-                android:layout_toRightOf="@id/btn_minus"
-                android:layout_marginLeft="-33dp"
+                android:layout_toLeftOf="@id/btn_plus"
+                android:layout_marginRight="14dp"
                 android:text="10"/>
             <ImageButton
                 android:layout_width="wrap_content"
