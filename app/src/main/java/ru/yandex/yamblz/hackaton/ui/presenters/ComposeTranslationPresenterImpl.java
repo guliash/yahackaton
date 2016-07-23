@@ -24,6 +24,7 @@ public class ComposeTranslationPresenterImpl implements ComposeTranslationPresen
 
     private String mTranslation;
 
+    @Inject
     public ComposeTranslationPresenterImpl(WordsStorage wordsStorage, Dictionary dictionary,
                                            Handler handler, Executor workerExecutor) {
         this.wordsStorage = wordsStorage;

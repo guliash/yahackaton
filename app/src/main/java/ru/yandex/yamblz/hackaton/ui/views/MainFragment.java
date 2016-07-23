@@ -37,7 +37,7 @@ public class MainFragment extends BaseFragment implements MainFragmentAdapter.Ca
 
     static {
         TASKS.add(Task.COMPOSE_TRANSLATION);
-        TASKS.add("2");
+        TASKS.add(Task.VOCALIZE);
         TASKS.add("3");
         TASKS.add("4");
         TASKS.add("5");

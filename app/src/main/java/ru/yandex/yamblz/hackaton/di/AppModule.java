@@ -89,9 +89,7 @@ public class AppModule {
     @Singleton
     SpeechKit provideSpeechKit(Context context) {
         SpeechKit speechKit = SpeechKit.getInstance();
-        speechKit.configure(context, "1ec90874-6646-423d-bca2-eddd3fd07f0b");
+        speechKit.configure(context, "ee7eed41-20a7-4575-a9a6-4eae8730397a");
         return speechKit;
     }
-
-
 }
