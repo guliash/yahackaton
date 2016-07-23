@@ -29,6 +29,8 @@ public class MainFragment extends BaseFragment {
         TASKS.add("3");
         TASKS.add("4");
         TASKS.add("5");
+        TASKS.add("6");
+        TASKS.add("7");
     }
 
     @Nullable

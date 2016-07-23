@@ -8,6 +8,7 @@
         android:layout_height="@dimen/mode_button_height"
         android:layout_marginLeft="@dimen/standart_margin"
         android:layout_marginRight="@dimen/standart_margin"
+        android:layout_marginTop="8dp"
         android:orientation="vertical">
 
         <TextView
