@@ -1,4 +1,4 @@
-package ru.yandex.yamblz.hackaton.ui;
+package ru.yandex.yamblz.hackaton.ui.views;
 
 import android.support.v7.app.AppCompatActivity;
 

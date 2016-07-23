@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import ru.yandex.yamblz.hackaton.dictionary.Dictionary;
-import ru.yandex.yamblz.hackaton.ui.MainActivity;
+import ru.yandex.yamblz.hackaton.ui.views.MainActivity;
 
 @Singleton
 @Component(modules = {AppModule.class})
