@@ -71,6 +71,9 @@ public class MainActivity extends BaseActivity implements MainFragment.Callbacks
             case Task.COMPOSE_TRANSLATION:
                 fragment = new ComposeTranslationFragment();
                 break;
+            case Task.VOCALIZE:
+                fragment = new VocalizeFragment();
+                break;
         }
         if(fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment)

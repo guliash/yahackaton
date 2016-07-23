@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.yandex.speechkit.SpeechKit;
 import ru.yandex.speechkit.Vocalizer;
 import ru.yandex.yamblz.hackaton.R;
 import ru.yandex.yamblz.hackaton.core.Task;
@@ -61,6 +62,7 @@ public class ComposeTranslationFragment extends BaseFragment implements ComposeT
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentComponent component = DaggerFragmentComponent.builder().appComponent(getAppComponent()).build();
+        getAppComponent().speechKit();
         component.inject(this);
     }
 
