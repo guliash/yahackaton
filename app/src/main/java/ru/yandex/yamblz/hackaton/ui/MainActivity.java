@@ -25,9 +25,6 @@ public class MainActivity extends BaseActivity {
     @Inject
     Handler uiHandler;
 
-    @BindView(R.id.text)
-    TextView textView;
-
     private Handler workerHandler;
 
     @Override
@@ -44,7 +41,7 @@ public class MainActivity extends BaseActivity {
                 uiHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(langs.toString());
+
                     }
                 });
             }
