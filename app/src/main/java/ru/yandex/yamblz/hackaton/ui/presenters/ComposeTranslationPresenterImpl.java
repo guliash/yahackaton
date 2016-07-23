@@ -1,19 +1,15 @@
 package ru.yandex.yamblz.hackaton.ui.presenters;
 
 import android.os.Handler;
-import android.util.Log;
 
-import java.util.List;
 import java.util.concurrent.Executor;
 
 import javax.inject.Inject;
 
 import ru.yandex.yamblz.hackaton.core.Word;
-import ru.yandex.yamblz.hackaton.dictionary.Article;
 import ru.yandex.yamblz.hackaton.dictionary.DicResult;
 import ru.yandex.yamblz.hackaton.dictionary.Dictionary;
 import ru.yandex.yamblz.hackaton.dictionary.Helper;
-import ru.yandex.yamblz.hackaton.dictionary.Translation;
 import ru.yandex.yamblz.hackaton.storage.WordsStorage;
 import ru.yandex.yamblz.hackaton.ui.views.ComposeTranslationView;
 
@@ -21,14 +17,13 @@ public class ComposeTranslationPresenterImpl implements ComposeTranslationPresen
 
     private ComposeTranslationView mView;
 
-    WordsStorage wordsStorage;
-    Dictionary dictionary;
-    Handler handler;
-    Executor workerExecutor;
+    private WordsStorage wordsStorage;
+    private Dictionary dictionary;
+    private Handler handler;
+    private Executor workerExecutor;
 
     private String mTranslation;
 
-    @Inject
     public ComposeTranslationPresenterImpl(WordsStorage wordsStorage, Dictionary dictionary,
                                            Handler handler, Executor workerExecutor) {
         this.wordsStorage = wordsStorage;
